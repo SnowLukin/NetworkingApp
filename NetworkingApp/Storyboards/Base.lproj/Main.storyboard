@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -99,7 +100,67 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6qB-9A-zuN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1004" y="69"/>
+            <point key="canvasLocation" x="1690" y="69"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="YuA-BE-pCZ">
+            <objects>
+                <viewController id="er1-XM-SnQ" customClass="MainViewController" customModule="NetworkingApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LfR-gJ-rKc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ysE-rV-NZT">
+                                <rect key="frame" x="40" y="313" width="334" height="70"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="gRj-Kp-jqQ"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="URLSession">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="23"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="er1-XM-SnQ" eventType="touchUpInside" id="MJp-R1-5C6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRe-dw-NNg">
+                                <rect key="frame" x="40" y="423" width="334" height="70"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="qZL-nQ-vVN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Alamofire"/>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="er1-XM-SnQ" eventType="touchUpInside" id="PmH-mF-DcO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XEi-Ju-HsU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pRe-dw-NNg" firstAttribute="top" secondItem="ysE-rV-NZT" secondAttribute="bottom" constant="40" id="4EI-fx-Dg1"/>
+                            <constraint firstItem="XEi-Ju-HsU" firstAttribute="trailing" secondItem="ysE-rV-NZT" secondAttribute="trailing" constant="40" id="Ay7-3M-sON"/>
+                            <constraint firstItem="ysE-rV-NZT" firstAttribute="centerY" secondItem="LfR-gJ-rKc" secondAttribute="centerY" constant="-100" id="XN4-hu-S4q"/>
+                            <constraint firstItem="ysE-rV-NZT" firstAttribute="leading" secondItem="XEi-Ju-HsU" secondAttribute="leading" constant="40" id="czc-cm-ScI"/>
+                            <constraint firstItem="pRe-dw-NNg" firstAttribute="leading" secondItem="XEi-Ju-HsU" secondAttribute="leading" constant="40" id="iXT-UT-phf"/>
+                            <constraint firstItem="XEi-Ju-HsU" firstAttribute="trailing" secondItem="pRe-dw-NNg" secondAttribute="trailing" constant="40" id="kSk-zp-0uG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="hgy-7U-ogK"/>
+                    <connections>
+                        <outlet property="alamofireButton" destination="pRe-dw-NNg" id="knD-xv-MYI"/>
+                        <outlet property="urlSessionButton" destination="ysE-rV-NZT" id="UXf-jY-wot"/>
+                        <segue destination="kJm-tG-zj5" kind="show" identifier="showPhotos" id="zBT-bf-6OZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gJZ-ix-OQ3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="862" y="69"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hpu-kd-R6e">
@@ -112,7 +173,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="kJm-tG-zj5" kind="relationship" relationship="rootViewController" id="tBt-fw-eVy"/>
+                        <segue destination="er1-XM-SnQ" kind="relationship" relationship="rootViewController" id="Mw3-5g-JY8"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wc6-k0-u3f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

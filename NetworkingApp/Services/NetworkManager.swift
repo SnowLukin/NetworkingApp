@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum NetworkError: Error {
     case invalidURL
@@ -57,5 +58,20 @@ class NetworkManager {
                 completion(.failure(.decodingError))
             }
         }.resume()
+    }
+    
+    func fetchDataWithAlomafire(_ url: String,
+                                completion: @escaping(Result<[Photo], NetworkError>) -> Void) {
+        AF.request(url)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    let courses = Photo.getPhotos(from: value)
+                    completion(.success(courses))
+                case .failure:
+                    completion(.failure(.decodingError))
+                }
+            }
     }
 }

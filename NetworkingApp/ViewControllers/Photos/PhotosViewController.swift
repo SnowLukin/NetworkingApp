@@ -1,30 +1,61 @@
 //
-//  ContactInfoViewController.swift
+//  PhotosViewController.swift
 //  NetworkingApp
 //
 //  Created by Snow Lukin on 18.01.2022.
 //
 
 import UIKit
+import Alamofire
+
+struct Link {
+    static let contactInfoUrl = "https://jsonplaceholder.typicode.com/photos"
+}
 
 class PhotosViewController: UICollectionViewController {
-
-    struct Constants {
-        static let contactInfoUrl = "https://jsonplaceholder.typicode.com/photos"
-    }
     
+    // MARK: Properties
     private var photos = [Photo]()
     
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetch()
+    }
+    
+    // MARK: Private Methods
+    private func getAlbumIDForSection(_ repeatTimes: Int) -> Int {
+        var count = 0
+        var albumId = -1
+        for photo in photos {
+            if count == repeatTimes {
+                break
+            }
+            if photo.albumId != albumId {
+                count += 1
+                albumId = photo.albumId ?? 1
+            }
+        }
+        
+        return albumId
     }
 }
 
 // MARK: - Networking
 extension PhotosViewController {
-    private func fetch() {
-        NetworkManager.shared.fetch(dataType: [Photo].self, from: Constants.contactInfoUrl) { result in
+    func fetchPhotos() {
+        NetworkManager.shared.fetch(dataType: [Photo].self, from: Link.contactInfoUrl) { result in
+            switch result {
+            case .success(let photos):
+                self.photos = photos
+                self.collectionView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func fetchAlmofire() {
+        NetworkManager.shared.fetchDataWithAlomafire(Link.contactInfoUrl) { result in
             switch result {
             case .success(let photos):
                 self.photos = photos
@@ -49,7 +80,7 @@ extension PhotosViewController {
         photos.forEach { photo in
             if photo.albumId != previousID {
                 count += 1
-                previousID = photo.albumId
+                previousID = photo.albumId ?? 1
             }
         }
         return count
@@ -87,22 +118,6 @@ extension PhotosViewController {
         default:
             fatalError()
         }
-    }
-    
-    private func getAlbumIDForSection(_ repeatTimes: Int) -> Int {
-        var count = 0
-        var albumId = -1
-        for photo in photos {
-            if count == repeatTimes {
-                break
-            }
-            if photo.albumId != albumId {
-                count += 1
-                albumId = photo.albumId
-            }
-        }
-        
-        return albumId
     }
 }
 
