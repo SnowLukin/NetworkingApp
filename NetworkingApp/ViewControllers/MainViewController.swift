@@ -23,7 +23,6 @@ class MainViewController: UIViewController {
 extension MainViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let photosVC = segue.destination as? PhotosViewController else { return }
-        guard sender is UIButton else { return }
         switch sender as? UIButton {
         case urlSessionButton:
             photosVC.fetchPhotos()

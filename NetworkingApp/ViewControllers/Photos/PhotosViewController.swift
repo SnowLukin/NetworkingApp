@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 
 struct Link {
     static let contactInfoUrl = "https://jsonplaceholder.typicode.com/photos"
